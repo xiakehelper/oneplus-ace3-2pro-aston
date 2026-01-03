@@ -3,7 +3,7 @@ VERSION="25.04"
 
 cd $2
 
-truncate -s 5G rootfs.img
+truncate -s 500M rootfs.img
 mkfs.ext4 rootfs.img
 mkdir rootdir
 mount -o loop rootfs.img rootdir
