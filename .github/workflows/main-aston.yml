@@ -37,12 +37,6 @@ jobs:
           name: boot-oneplus-aston_${{ matrix.version }}_12G_A15.img
           path: ${{ github.workspace }}/boot12G.img
 
-      - name: Upload 16G RAM A14 boot.img
-        uses: actions/upload-artifact@v4
-        with:
-          name: boot-oneplus-aston_${{ matrix.version }}_16G_A14.img
-          path: ${{ github.workspace }}/boot16G_A14.img
-
   rootfs:
     runs-on: ubuntu-24.04-arm
     timeout-minutes: 20
@@ -99,34 +93,16 @@ jobs:
           name: firmware-oneplus-a15
           path: ${{ github.workspace }}/firmware-oneplus-a15.deb
 
-  firmware-a14:
-    needs: rootfs
-    runs-on: ubuntu-latest
-    timeout-minutes: 2
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Install Dependencies
-        run: sudo apt update && sudo apt install gcc make git wget dpkg
-
-      - name: Squash firmwares to .mbn
-        run: sudo sh aston-fw_squasher-a14.sh ${{ github.workspace }}
-
-      - name: Upload firmware.deb
-        uses: actions/upload-artifact@v4
-        with:
-          name: firmware-oneplus-a14
-          path: ${{ github.workspace }}/firmware-oneplus-a14.deb
 
   rootfs-packager:
-    needs: [kernel, alsa, firmware-a14, firmware-a15]
+    needs: [kernel, alsa, firmware-a15]
     runs-on: ubuntu-24.04-arm
     timeout-minutes: 10
     strategy:
             matrix:
                 desktop: [ubuntu-desktop]
                 kernel: [6.14]
-                android: [14,15]
+                android: [15]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/download-artifact@v4
