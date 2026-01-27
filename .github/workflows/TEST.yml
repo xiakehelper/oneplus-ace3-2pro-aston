@@ -9,7 +9,7 @@ jobs:
     timeout-minutes: 20
     strategy:
             matrix:
-                desktop: []
+                desktop: [openssh-server]
     steps:
       - uses: actions/checkout@v4
       - name: Install Dependencies
