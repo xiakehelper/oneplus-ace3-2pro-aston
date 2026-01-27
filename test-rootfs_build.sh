@@ -54,16 +54,11 @@ touch rootdir/var/lib/gdm/run-initial-setup
 chroot rootdir pw-metadata -n settings 0 clock.force-quantum 2048
 
 # docker
-chroot rootdir curl -sSL https://gitee.com/SuperManito/LinuxMirrors/raw/main/DockerInstallation.sh
-chroot rootdir bash < /DockerInstallation.sh \
-                --source mirrors.tencent.com/docker-ce \
-                --source-registry registry.hub.docker.com \
-                --protocol http \
-                --install-latest true \
-                --close-firewall true \
-                --ignore-backup-tips
+cp $2/get-docker.sh $2/rootdir/
 
-chroot rootdir rm -r /DockerInstallation.sh
+chroot rootdir bash get-docker.sh  --channel stable --mirror Aliyun
+
+rm -r $2/rootdir/get-docker.sh
 daemon_json="rootdir/etc/docker/daemon.json"
 if [ ! -f "$daemon_json" ]; then
    mkdir -p rootdir/etc/docker
