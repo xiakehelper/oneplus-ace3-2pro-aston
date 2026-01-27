@@ -25,6 +25,18 @@ jobs:
           name: linux-oneplus-sm8550_${{ matrix.version }}
           path: ${{ github.workspace }}/linux-oneplus-sm8550.deb
 
+      - name: Upload 16G RAM boot.img
+        uses: actions/upload-artifact@v4
+        with:
+          name: boot-oneplus-aston_${{ matrix.version }}_16G_A15.img
+          path: ${{ github.workspace }}/boot16G.img
+
+      - name: Upload 12G RAM boot.img
+        uses: actions/upload-artifact@v4
+        with:
+          name: boot-oneplus-aston_${{ matrix.version }}_12G_A15.img
+          path: ${{ github.workspace }}/boot12G.img
+          
       - name: Upload 24G RAM boot.img
         uses: actions/upload-artifact@v4
         with:
