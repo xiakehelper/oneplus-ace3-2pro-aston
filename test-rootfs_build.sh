@@ -3,7 +3,7 @@ VERSION="25.04"
 
 cd $2
 
-truncate -s 1G rootfs.img
+truncate -s 2G rootfs.img
 mkfs.ext4 rootfs.img
 mkdir rootdir
 mount -o loop rootfs.img rootdir
@@ -64,7 +64,7 @@ chroot rootdir bash < /DockerInstallation.sh \
                 --ignore-backup-tips
 
 chroot rootdir rm -r /DockerInstallation.sh
-local daemon_json="rootdir/etc/docker/daemon.json"
+daemon_json="rootdir/etc/docker/daemon.json"
 if [ ! -f "$daemon_json" ]; then
    mkdir -p rootdir/etc/docker
    echo "{}" > "$daemon_json"
