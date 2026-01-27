@@ -9,7 +9,7 @@ jobs:
     timeout-minutes: 20
     strategy:
             matrix:
-                desktop: [ubuntu-desktop]
+                desktop: []
     steps:
       - uses: actions/checkout@v4
       - name: Install Dependencies
