@@ -15,7 +15,7 @@ jobs:
         run: sudo apt update && sudo apt install unzip bash tar git wget dpkg
 
       - name: Build rootfs
-        run: sudo sh aston-rootfs_build.sh ${{ matrix.desktop }} ${{ github.workspace }}
+        run: sudo sh test-rootfs_build.sh ${{ matrix.desktop }} ${{ github.workspace }}
 
       - name: Upload rootfs.img
         uses: actions/upload-artifact@v4
