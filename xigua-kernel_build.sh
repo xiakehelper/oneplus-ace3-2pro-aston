@@ -8,6 +8,15 @@ sed -i "s/Version:.*/Version: ${_kernel_version}/" $1/linux-oneplus-sm8550/DEBIA
 
 chmod +x $1/mkbootimg
 
+cat $1/linux/arch/arm64/boot/Image $1/linux/arch/arm64/boot/dts/qcom/sm8550-oneplus-xigua_16.dtb > $1/linux/Image_w_dtb
+gzip Image_w_dtb
+$1/mkbootimg --header_version 4 --base 0x0 --os_version 15.0.0 --os_patch_level 2025-02 --kernel $1/linux/Image_w_dtb.gz -o $1/boot16G.img
+
+cat $1/linux/arch/arm64/boot/Image $1/linux/arch/arm64/boot/dts/qcom/sm8550-oneplus-xigua_12G.dtb > $1/linux/Image_w_dtb
+gzip Image_w_dtb
+$1/mkbootimg --header_version 4 --base 0x0 --os_version 15.0.0 --os_patch_level 2025-02 --kernel $1/linux/Image_w_dtb.gz -o $1/boot12G.img
+
+
 cat $1/linux/arch/arm64/boot/Image $1/linux/arch/arm64/boot/dts/qcom/sm8550-oneplus-xigua.dtb > $1/linux/Image_w_dtb
 gzip Image_w_dtb
 $1/mkbootimg --header_version 4 --base 0x0 --os_version 15.0.0 --os_patch_level 2025-02 --kernel $1/linux/Image_w_dtb.gz -o $1/boot24G.img
