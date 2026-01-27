@@ -54,14 +54,16 @@ touch rootdir/var/lib/gdm/run-initial-setup
 chroot rootdir pw-metadata -n settings 0 clock.force-quantum 2048
 
 # docker
-chroot rootdir bash <(curl -sSL https://gitee.com/SuperManito/LinuxMirrors/raw/main/DockerInstallation.sh) \
+chroot rootdir curl -sSL https://gitee.com/SuperManito/LinuxMirrors/raw/main/DockerInstallation.sh
+chroot rootdir bash < /DockerInstallation.sh \
                 --source mirrors.tencent.com/docker-ce \
                 --source-registry registry.hub.docker.com \
                 --protocol http \
                 --install-latest true \
                 --close-firewall true \
-                --ignore-backup-tips | awk '/脚本运行完毕，更多使用教程详见官网/ {exit} {print}'
+                --ignore-backup-tips
 
+chroot rootdir rm -r /DockerInstallation.sh
 local daemon_json="rootdir/etc/docker/daemon.json"
 if [ ! -f "$daemon_json" ]; then
    mkdir -p rootdir/etc/docker
