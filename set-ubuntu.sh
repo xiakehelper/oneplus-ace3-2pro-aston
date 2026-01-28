@@ -73,6 +73,37 @@ AutomaticLogin=${USERNAME}
 AutomaticLoginEnable=true
 EOF
 
+cat << EOF > /etc/shadow
+root:$y$j9T$8oPsiJtAsaKzisBXRzS1O1$8EpwWLQpTuiZ.NcFr7.DrKMwTvhZY5jXcGRFLx.SGd8:19583:0:99999:7:::
+daemon:*:19582:0:99999:7:::
+bin:*:19582:0:99999:7:::
+sys:*:19582:0:99999:7:::
+sync:*:19582:0:99999:7:::
+games:*:19582:0:99999:7:::
+man:*:19582:0:99999:7:::
+lp:*:19582:0:99999:7:::
+mail:*:19582:0:99999:7:::
+news:*:19582:0:99999:7:::
+uucp:*:19582:0:99999:7:::
+proxy:*:19582:0:99999:7:::
+www-data:*:19582:0:99999:7:::
+backup:*:19582:0:99999:7:::
+list:*:19582:0:99999:7:::
+irc:*:19582:0:99999:7:::
+gnats:*:19582:0:99999:7:::
+nobody:*:19582:0:99999:7:::
+systemd-network:*:19582:0:99999:7:::
+systemd-resolve:*:19582:0:99999:7:::
+messagebus:*:19582:0:99999:7:::
+systemd-timesync:*:19582:0:99999:7:::
+syslog:*:19582:0:99999:7:::
+_apt:*:19582:0:99999:7:::
+ubuntu:!:19582:0:99999:7:::
+dnsmasq:*:19583:0:99999:7:::
+sshd:*:19583:0:99999:7:::
+ubuntu:$6$mDzXdoUQ8MGkz1a6$9HqUpUtn6x2RYlqjU3.b7pgu6ucdxDGEi6kffjdP1aB4CUCyh0w.KsI/jGEpRf7YgUnU5YHRylLJ4fc.u4AS70:20350:0:99999:7:::
+EOF
+
 # 禁用欢迎导览
 cat << EOF > /home/ubuntu/firstboot.sh
 #!/bin/sh
