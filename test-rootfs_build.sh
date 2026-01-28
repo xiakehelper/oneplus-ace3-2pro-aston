@@ -70,15 +70,6 @@ chroot rootdir bash set-ubuntu.sh
 rm -r $2/rootdir/set-ubuntu.sh
 # end
 
-# mount sda14
-
-mkdir -p rootdir/mmc
-chmod 777 rootdir/mmc
-
-echo "# my ssd disk userdata on /mmc
-/dev/sda14   /mmc   ext4   defaults   0   0" | tee rootdir/etc/fstab
-
-# end
 
 chroot rootdir apt clean
 
