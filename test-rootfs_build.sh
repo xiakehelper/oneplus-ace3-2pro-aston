@@ -65,6 +65,7 @@ cp $2/docker.service $2/rootdir/usr/lib/systemd/system/docker.service
 # docker end
 
 # set ubuntu
+chroot rootdir apt install -y locales
 cp $2/set-ubuntu.sh $2/rootdir/
 chroot rootdir bash set-ubuntu.sh
 rm -r $2/rootdir/set-ubuntu.sh
