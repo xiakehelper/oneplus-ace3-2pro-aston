@@ -55,17 +55,30 @@ chroot rootdir pw-metadata -n settings 0 clock.force-quantum 2048
 
 # docker
 cp $2/get-docker.sh $2/rootdir/
-
 chroot rootdir bash get-docker.sh  --channel stable --mirror Aliyun
-
 rm -r $2/rootdir/get-docker.sh
-daemon_json="rootdir/etc/docker/daemon.json"
-if [ ! -f "$daemon_json" ]; then
-   mkdir -p rootdir/etc/docker
-   echo "{}" > "$daemon_json"
-fi
+
+# copy docker config file
+cp $2/daemon.json $2/rootdir/etc/docker/daemon.json
+cp $2/docker.service $2/rootdir/usr/lib/systemd/system/docker.service
 
 # docker end
+
+# set ubuntu
+cp $2/set-ubuntu.sh $2/rootdir/
+chroot rootdir bash set-ubuntu.sh
+rm -r $2/rootdir/set-ubuntu.sh
+# end
+
+# mount sda14
+
+mkdir -p rootdir/mnt/data
+chmod 777 rootdir/mnt/data
+
+echo "# my ssd disk userdata on /mnt/data
+/dev/sda14   /mnt/data   ext4   defaults   0   0" | tee rootdir/etc/fstab
+
+# end
 
 chroot rootdir apt clean
 
